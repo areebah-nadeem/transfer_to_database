@@ -1,0 +1,26 @@
+name: Airtable Sync
+
+on:
+  schedule:
+    # Runs the script on October 23rd at 9:00 AM UTC
+    - cron: '0 9 23 10 *'
+  workflow_dispatch: # Allows manual triggering.
+
+jobs:
+  airtable-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Airtable SDK
+        run: npm install airtable
+
+      - name: Run Airtable Sync Script
+        run: node main.js
